@@ -1,8 +1,8 @@
-const Total = (props) => {
-    return(
-        <p><strong>Total of Excercises: { props.course.parts[0].exercises + 
-        props.course.parts[1].exercises + props.course.parts[2].exercises }
-        </strong></p>
-    )
+const Total = ({parts}) => {
+  const ttl = parts.reduce(
+    (s, p) => s + p.exercises,0)
+  return (
+    <p>Total of Excercises: {ttl}</p>
+  )
 }
 export default Total
