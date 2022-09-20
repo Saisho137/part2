@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -26,40 +29,11 @@ const App = () => {
     }
   }
   //
-  const handleNameChange = (event) => {
-    //console.log(event.target.value)
-    setNewName(event.target.value)
-  }
-  const handleNumberChange = (event) => {
-    //console.log(event.target.value)
-    setNewNumber(event.target.value)
-  }
   const handleSearchChange = (event) => {
+    //console.log(event.target.value)
     setNewSearch(event.target.value)
   }
-  const Display = ({ person, number }) => {
-    return (
-      <div>
-        <p>{person}: {number}</p>
-      </div>
-    )
-  }
-  const Filter = ({ newSearch }) => {
-    if (newSearch.length > 0) {
-      return (
-        persons.filter(element => element.name === newSearch)
-          .map(person =>
-            <Display key={person.name}
-              person={person.name} number={person.number} />)
-      )
-    } else {
-      return (
-        persons.map(person =>
-          <Display key={person.name}
-            person={person.name} number={person.number} />)
-      )
-    }
-  }
+  
   //
   return (
     <div>
@@ -70,29 +44,13 @@ const App = () => {
           value={newSearch}
           onChange={handleSearchChange}
         />
+      <Filter newSearch={newSearch} persons={persons} />
       </div>
-      <form onSubmit={addItem}>
-        <h2>Add a New Register</h2>
-        <div>
-          name: <input
-            value={newName}
-            onChange={handleNameChange}
-          />
-        </div>
-        <br></br>
-        <div>
-          number: <input
-            value={newNumber}
-            onChange={handleNumberChange}
-          />
-        </div>
-        <br></br>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <h2>Add a New Register</h2>
+      <PersonForm setNewName={setNewName} setNewNumber={setNewNumber} 
+      addItem={addItem} newName={newName} newNumber={newNumber} />
       <h2>Numbers</h2>
-      <Filter newSearch={newSearch} />
+      <Persons persons={persons} />
     </div>
   )
 }
