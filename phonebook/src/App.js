@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas',
-      number: '3113953908' } ]) 
-  const [ newName, setNewName ] = useState('')
-  const [ newNumber, setNewNumber ] = useState('')
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456' },
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
+  ])
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  const [newSearch, setNewSearch] = useState('')
   //
   const addItem = (event) => {
     event.preventDefault()
@@ -13,9 +17,9 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    if (persons.find(element => element.name === newName)){
+    if (persons.find(element => element.name === newName)) {
       alert(`${newName} is already added to phonebook`)
-    } else{
+    } else {
       setPersons(persons.concat(nameObject))
       setNewName('')
       setNewNumber('')
@@ -30,27 +34,54 @@ const App = () => {
     //console.log(event.target.value)
     setNewNumber(event.target.value)
   }
-  const Display = ({person, number}) => {
+  const handleSearchChange = (event) => {
+    setNewSearch(event.target.value)
+  }
+  const Display = ({ person, number }) => {
     return (
       <div>
-      <p>{person}: {number}</p>
+        <p>{person}: {number}</p>
       </div>
     )
-  } 
+  }
+  const Filter = ({ newSearch }) => {
+    if (newSearch.length > 0) {
+      return (
+        persons.filter(element => element.name === newSearch)
+          .map(person =>
+            <Display key={person.name}
+              person={person.name} number={person.number} />)
+      )
+    } else {
+      return (
+        persons.map(person =>
+          <Display key={person.name}
+            person={person.name} number={person.number} />)
+      )
+    }
+  }
   //
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
+      <div>
+        Filter shown with:
+        <input
+          value={newSearch}
+          onChange={handleSearchChange}
+        />
+      </div>
       <form onSubmit={addItem}>
+        <h2>Add a New Register</h2>
         <div>
-          name: <input 
+          name: <input
             value={newName}
             onChange={handleNameChange}
           />
         </div>
         <br></br>
         <div>
-          number: <input 
+          number: <input
             value={newNumber}
             onChange={handleNumberChange}
           />
@@ -61,9 +92,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map( person => 
-      <Display key={person.name} 
-      person={person.name} number={person.number}/>)}
+      <Filter newSearch={newSearch} />
     </div>
   )
 }
