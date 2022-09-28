@@ -1,10 +1,8 @@
 const PersonForm = ({setNewName,setNewNumber,addItem,newName,newNumber}) => {
     const handleNameChange = (event) => {
-      console.log(event.target.value)
       setNewName(event.target.value)
     }
     const handleNumberChange = (event) => {
-      console.log(event.target.value)
       setNewNumber(event.target.value)
     }
     
