@@ -1,7 +1,7 @@
 import Display from "./Display"
 import AboutCountry from "./AboutCountry"
 
-const Filter = ({ newSearch, countries }) => {
+const Filter = ({ newSearch, countries, setNewSearch }) => {
 
   const numcountries = countries.filter(country => country.name.common.toUpperCase().includes( newSearch.toUpperCase() ) )
   //
@@ -14,8 +14,13 @@ const Filter = ({ newSearch, countries }) => {
     return (
       countries.filter(country => country.name.common.toUpperCase().includes( newSearch.toUpperCase() ) )
       .map(country =>
-        <Display key={country.name.common}
-          country={country.name.common}/>)
+        <div key={country.name.common}>
+          <Display 
+          country={country.name.common}/> 
+          <button
+          onClick={() => setNewSearch(country.name.common)}>show</button>
+        </div>
+        )
     )
 }
 export default Filter

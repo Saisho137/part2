@@ -28,7 +28,7 @@ function App() {
           value={newSearch}
           onChange={handleSearchChange}
         />
-      <Filter newSearch={newSearch} countries={countries} />
+      <Filter newSearch={newSearch} countries={countries} setNewSearch={setNewSearch} />
     </div>
   )
 
