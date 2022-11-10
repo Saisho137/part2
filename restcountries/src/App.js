@@ -6,6 +6,7 @@ function App() {
 
   const [countries, setCountries] = useState([])
   const [newSearch, setNewSearch] = useState('')
+  const api_key = process.env.REACT_APP_API_KEY
 
   const handleSearchChange = (event) => {
     //console.log(event.target.value)
@@ -18,7 +19,7 @@ function App() {
       .then(response => {
         setCountries(response.data)
       })
-      console.log('Axios is running')
+      console.log('Axios of App.js is running')
   }, [])
 
   return (
@@ -28,7 +29,7 @@ function App() {
           value={newSearch}
           onChange={handleSearchChange}
         />
-      <Filter newSearch={newSearch} countries={countries} setNewSearch={setNewSearch} />
+      <Filter newSearch={newSearch} countries={countries} setNewSearch={setNewSearch} ApiKey={api_key}/>
     </div>
   )
 

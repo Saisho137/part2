@@ -1,7 +1,7 @@
 import Display from "./Display"
 import AboutCountry from "./AboutCountry"
 
-const Filter = ({ newSearch, countries, setNewSearch }) => {
+const Filter = ({ newSearch, countries, setNewSearch, ApiKey }) => {
 
   const numcountries = countries.filter(country => country.name.common.toUpperCase().includes( newSearch.toUpperCase() ) )
   //
@@ -9,7 +9,7 @@ const Filter = ({ newSearch, countries, setNewSearch }) => {
       return <p>Too many matches, specify antoher Filter</p>
     }
     else if (numcountries.length === 1) {
-      return <AboutCountry country={numcountries[0]}/>
+      return <AboutCountry country={numcountries[0]} ApiKey={ApiKey}/>
     } 
     return (
       countries.filter(country => country.name.common.toUpperCase().includes( newSearch.toUpperCase() ) )

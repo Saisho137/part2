@@ -1,5 +1,6 @@
+import CapitalWeather from "./CapitalWeather"
 
-const AboutCountry = ({country}) => {
+const AboutCountry = ({country, ApiKey}) => {
     return (
         <div>
         <h1>{country.name.common}</h1>
@@ -11,7 +12,8 @@ const AboutCountry = ({country}) => {
         {Object.values(country.languages).map((language) => (<li key={language}>{language}</li>))}
         </ul>
         </div>
-        <img src={country.flags.png} alt='' width='125px'></img>
+        <img src={country.flags.png} alt='' width='200'></img>
+        <CapitalWeather capital={country.capital} ApiKey={ApiKey} />
       </div>
     )
 }
